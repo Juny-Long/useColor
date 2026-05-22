@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>旋涡之光表盘颜色配置</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f5f5f7;
+            padding: 15px;
+            padding-bottom: 80px;
+            color: #1d1d1f;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            margin: 10px 0 20px;
+        }
+
+        .block {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .block-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .tip-notice {
+            background: #fff2f2;
+            color: #d82e2e;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 6px 0;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #007aff;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+
+        .config-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-name {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .config-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .form-label {
+            font-size: 14px;
+            color: #444;
+            margin: 12px 0 6px;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 44px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0 12px;
+            font-size: 15px;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            border-color: #007aff;
+            outline: none;
+        }
+
+        .color-view {
+            width: 100%;
+            height: 55px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border: 1px solid #e5e5e5;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+            background: #f7f7f9;
+            border-radius: 6px;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .data-val {
+            color: #007aff;
+            font-weight: 500;
+        }
+
+        .btn {
+            width: 100%;
+            height: 44px;
+            border-radius: 6px;
+            border: none;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: #007aff;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #5856d6;
+            color: #fff;
+        }
+
+        .btn:active {
+            opacity: 0.9;
+        }
+
+        .color-pick-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .color-picker {
+            width: 55px;
+            height: 55px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        .two-col {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .col-half {
+            flex: 1;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .color-block {
+            aspect-ratio: 1;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .small-tip {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .faq-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .faq-a {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="page-title">旋涡之光表盘颜色配置</h2>
+
+    <!-- 使用步骤 -->
+    <div class="block">
+        <div class="block-title">使用步骤</div>
+        <div class="step-item">
+            <span class="step-num">1</span>
+            <span>选择或自定义想要的颜色</span>
+        </div>
+        <div class="step-item">
+            <span class="step-num">2</span>
+            <span>复制转换后的十进制数值</span>
+        </div>
+        <div class="step-item">
+            <span class="step-num">3</span>
+            <span>打开手表Connect IQ应用</span>
+        </div>
+        <div class="step-item">
+            <span class="step-num">4</span>
+            <span>进入旋涡之光表盘设置界面</span>
+        </div>
+        <div class="step-item">
+            <span class="step-num">5</span>
+            <span>切换至第4套自定义配色</span>
+        </div>
+        <div class="step-item">
+            <span class="step-num">6</span>
+            <span>粘贴数值保存即可生效</span>
+        </div>
+    </div>
+
+
+    <!-- 颜色转换 -->
+    <!-- <div class="block">
+        <div class="block-title">颜色互相转换</div>
+        <label class="form-label">输入6位十六进制色值</label>
+        <input class="form-input" type="text" id="hex" placeholder="例：FF69B4" maxlength="6">
+  
+        <div class="data-row">
+            <span>对应十进制数值</span>
+            <span class="data-val" id="decDisplay">-</span>
+        </div>
+        <button class="btn btn-primary" onclick="copyDec()">复制十进制数值</button>
+
+        <label class="form-label">输入十进制数字</label>
+        <input class="form-input" type="number" id="dec" placeholder="例：16738740">
+ 
+        <div class="data-row">
+            <span>对应十六进制色值</span>
+            <span class="data-val" id="hexDisplay">-</span>
+        </div>
+        <button class="btn btn-secondary" onclick="copyHex()">复制十六进制代码</button>
+
+        <div class="small-tip">数值区间0-16777215，输入任意格式自动同步转换</div>
+    </div> -->
+
+    <!-- 取色器 -->
+    <div class="block">
+        <div class="block-title">可视化选色</div>
+        <div class="color-pick-row">
+            <input type="color" class="color-picker" id="picker">
+            <div style="flex:1">
+                <div class="color-view" id="p3" style="height:55px"></div>
+            </div>
+        </div>
+        <div class="data-row">
+            <span>左边正方形点击选择，当前选中颜色：</span>
+            <span class="data-val" id="pickName">-</span>
+        </div>
+        <div class="two-col">
+            <div class="col-half">
+                <label class="form-label">十六进制</label>
+                <input class="form-input" type="text" id="phex" readonly>
+            </div>
+            <div class="col-half">
+                <label class="form-label">十进制</label>
+                <input class="form-input" type="text" id="pdec" readonly>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="copyPick()">复制数值用于表盘设置</button>
+    </div>
+
+    <!-- 常用配色 -->
+    <div class="block">
+        <div class="block-title">常用快捷颜色（点击自动填入上方可视化选色）</div>
+        <div class="color-grid" id="presetList"></div>
+        <div class="small-tip">点击色块即可选中对应颜色，随后复制数值使用</div>
+    </div>
+
+        <!-- 配置项说明 -->
+        <div class="block">
+            <div class="block-title">可配置颜色项目</div>
+            <div class="config-item">
+                <div class="config-name">外层弧线 Layer0Color1-12</div>
+                <div class="config-desc">表盘最外圈弧线，推荐红橙黄暖色调，可分段设置渐变</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">中层弧线 Layer1Color1-12</div>
+                <div class="config-desc">中间圈层弧线，选用过渡色系，丰富画面层次</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">内层弧线 Layer2Color1-12</div>
+                <div class="config-desc">中心内侧弧线，蓝紫粉冷色系视觉效果更佳</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">时间文字 TimeColor</div>
+                <div class="config-desc">中心时间字体颜色，浅色样式保证查看清晰</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">日期文字 DateColor</div>
+                <div class="config-desc">日期星期显示，选用浅灰色低调适配整体风格</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">文字阴影 TimeShadowColor</div>
+                <div class="config-desc">时间字体阴影，深色衬托提升立体观感</div>
+            </div>
+            <div class="config-item">
+                <div class="config-name">表盘背景 BackgroundColor</div>
+                <div class="config-desc">整体底色建议深色，突出彩色弧线轮廓</div>
+            </div>
+            <div class="small-tip">总计40处颜色参数，可按需修改单一项或整套配色</div>
+        </div>
+
+    <!-- 常见问题 -->
+    <div class="block">
+        <div class="block-title">常见问题</div>
+        <div class="faq-item">
+            <div class="faq-q">填写颜色没有变化？</div>
+            <div class="faq-a">确认表盘主题选为自定义配色第四项，数值格式填写无误</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">如何搭配好看配色？</div>
+            <div class="faq-a">日落风：红橙黄渐变；海洋风：蓝青绿组合；霓虹风：高饱和紫粉蓝</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">只修改部分参数是否可行？</div>
+            <div class="faq-a">可以单独改动单个颜色项，其余保留默认数值即可</div>
+        </div>
+    </div>
+
+    <script>
+        const presets = [
+            { hex: "FF0000", name: "红色" },
+            { hex: "FF4500", name: "橙红" },
+            { hex: "FF8C00", name: "橙色" },
+            { hex: "FFD700", name: "金色" },
+            { hex: "FFFF00", name: "黄色" },
+            { hex: "ADFF2F", name: "黄绿" },
+            { hex: "00FF00", name: "绿色" },
+            { hex: "00FA9A", name: "浅绿" },
+            { hex: "00FFFF", name: "青色" },
+            { hex: "00CED1", name: "湖蓝" },
+            { hex: "4169E1", name: "宝蓝" },
+            { hex: "0000FF", name: "纯蓝" },
+            { hex: "8A2BE2", name: "紫罗兰" },
+            { hex: "9400D3", name: "深紫" },
+            { hex: "FF00FF", name: "玫红" },
+            { hex: "FF1493", name: "深粉" },
+            { hex: "FF69B4", name: "粉色" },
+            { hex: "FFFFFF", name: "白色" },
+            { hex: "C0C0C0", name: "银色" },
+            { hex: "808080", name: "灰色" },
+            { hex: "333333", name: "深灰" },
+            { hex: "000000", name: "黑色" },
+            { hex: "0A0A1A", name: "暗夜蓝" },
+            { hex: "FF6347", name: "番茄色" }
+        ];
+
+        const list = document.getElementById("presetList");
+        presets.forEach(p => {
+            const div = document.createElement("div");
+            div.className = "color-block";
+            div.style.background = "#" + p.hex;
+            div.title = p.name;
+            div.onclick = () => {
+                document.getElementById("picker").value = "#" + p.hex;
+                updatePick();
+            };
+            list.appendChild(div);
+        });
+
+        function h2d(h) { return parseInt(h, 16); }
+        function d2h(d) { return (+d).toString(16).padStart(6, "0").toUpperCase(); }
+
+        document.getElementById("hex").addEventListener("input", function () {
+            let val = this.value.replace(/[^0-9A-Fa-f]/g, "").slice(0, 6).toUpperCase();
+            this.value = val;
+            if (val.length === 6) {
+                const dec = h2d(val);
+                document.getElementById("dec").value = dec;
+                document.getElementById("decDisplay").innerText = dec;
+                document.getElementById("hexDisplay").innerText = "#" + val;
+                document.getElementById("p1").style.background = "#" + val;
+                document.getElementById("p2").style.background = "#" + val;
+            } else {
+                document.getElementById("decDisplay").innerText = "-";
+            }
+        });
+
+        document.getElementById("dec").addEventListener("input", function () {
+            let val = this.value;
+            const num = Number(val);
+            if (!isNaN(num) && num >= 0 && num <= 16777215) {
+                const hex = d2h(num);
+                document.getElementById("hex").value = hex;
+                document.getElementById("decDisplay").innerText = num;
+                document.getElementById("hexDisplay").innerText = "#" + hex;
+                document.getElementById("p1").style.background = "#" + hex;
+                document.getElementById("p2").style.background = "#" + hex;
+            } else {
+                document.getElementById("hexDisplay").innerText = "-";
+            }
+        });
+
+        document.getElementById("picker").addEventListener("input", updatePick);
+        function updatePick() {
+            const raw = document.getElementById("picker").value.slice(1).toUpperCase();
+            const dec = h2d(raw);
+            document.getElementById("phex").value = raw;
+            document.getElementById("pdec").value = dec;
+            document.getElementById("p3").style.background = "#" + raw;
+            const match = presets.find(item => item.hex === raw);
+            document.getElementById("pickName").innerText = match ? match.name : "自定义颜色";
+        }
+
+        function copyDec() {
+            const txt = document.getElementById("dec").value;
+            if (txt) navigator.clipboard.writeText(txt).then(() => alert("数值已复制"));
+        }
+        function copyHex() {
+            const txt = document.getElementById("hex").value;
+            if (txt) navigator.clipboard.writeText("#" + txt).then(() => alert("色值已复制"));
+        }
+        function copyPick() {
+            const txt = document.getElementById("pdec").value;
+            if (txt) navigator.clipboard.writeText(txt).then(() => alert("表盘数值已复制"));
+        }
+
+        updatePick();
+    </script>
+</body>
+</html>
